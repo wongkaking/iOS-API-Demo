@@ -28,7 +28,6 @@ extension UITableViewCell {
 }
 
 extension UITableViewHeaderFooterView {
-
     static var defaultReuseIdentifier: String {
         return String(describing: self)
     }

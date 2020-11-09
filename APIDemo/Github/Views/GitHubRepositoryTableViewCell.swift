@@ -42,6 +42,7 @@ final class GitHubRepositoryTableViewCell: UITableViewCell {
     private func setupUI() {
 
         descriptionLabel.numberOfLines = 0
+        selectionStyle = .none
 
         [nameLabel, descriptionLabel, languageColorImage, languageLabel, starCountLabel, forkCountLabel, starImageView, forkImageView].forEach {
             contentView.addSubview($0)
@@ -62,12 +63,12 @@ final class GitHubRepositoryTableViewCell: UITableViewCell {
             make.leading.equalTo(nameLabel)
             make.height.width.equalTo(iconWidth)
             make.top.equalTo(descriptionLabel.snp.bottom).offset(16)
+            make.bottom.equalToSuperview().inset(8)
         }
 
         languageLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(languageColorImage.snp.trailing).offset(8)
             make.centerY.equalTo(languageColorImage)
-            make.bottom.equalToSuperview().inset(8)
         }
 
         forkImageView.snp.makeConstraints { (make) in
@@ -111,7 +112,7 @@ final class GitHubRepositoryTableViewCell: UITableViewCell {
     func setupCell(repository: Repository) {
         nameLabel.text = repository.name
         descriptionLabel.text = repository.description
-        languageLabel.text = repository.language
+        languageLabel.text = repository.language ?? "other"
         forkCountLabel.text = "\(repository.forksCount)"
         starCountLabel.text = "\(repository.starCount)"
         languageColorImage.backgroundColor = matchLanguageColor(repository.language)

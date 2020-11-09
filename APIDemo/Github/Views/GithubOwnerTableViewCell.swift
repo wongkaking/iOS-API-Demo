@@ -80,6 +80,7 @@ final class GithubOwnerTableViewCell: UITableViewCell {
     }
 
     private func setupUI() {
+        selectionStyle = .none
         [avatatImageView, ownerNameLabel, loginLabel, follersLabel, followingLabel, companyView, locationView, emailView].forEach {
             contentView.addSubview($0)
         }
@@ -92,13 +93,11 @@ final class GithubOwnerTableViewCell: UITableViewCell {
         ownerNameLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(avatatImageView.snp.trailing).offset(32)
             make.trailing.greaterThanOrEqualToSuperview().inset(24)
-//            make.centerY.equalTo(avatatImageView).offset(-8)
             make.top.equalTo(avatatImageView).offset(8)
         }
 
         loginLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(ownerNameLabel)
-//            make.centerY.equalTo(avatatImageView).offset(16)
             make.bottom.equalTo(avatatImageView).offset(-8)
         }
 
@@ -132,7 +131,7 @@ final class GithubOwnerTableViewCell: UITableViewCell {
 
     func setupCell(user: User) {
         loginLabel.text = user.login
-        ownerNameLabel.text = user.name.capitalized
+        ownerNameLabel.text = user.name?.capitalized
         if let followerCount = user.followers {
             follersLabel.text = "Follers: \(formatCount(count: followerCount))"
         }
